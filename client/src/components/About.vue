@@ -3,9 +3,12 @@
     <b-row>
       <b-col>
          <b-card class="about-us-card" title="About Us">
-            <p class="card-text">
-              We are building the next generation of travel tech.
-            </p>
+            <div v-for="country in countries" :key="country.id">
+                  <p>
+                    <span><b>{{ country.iso }}</b></span><br />
+                    <span>{{ country.name }}</span>
+                  </p>
+            </div>
         </b-card>
       </b-col>
     </b-row>
@@ -13,8 +16,24 @@
 </template>
 
 <script>
+import PostsService from '@/services/PostsService'
+
 export default {
-  name: 'About'
+  name: 'About',
+  data () {
+    return {
+      countries: []
+    }
+  },
+  mounted () {
+    this.getPosts()
+  },
+  methods: {
+    async getPosts () {
+      const response = await PostsService.fetchPosts()
+      this.countries = response.data.countries
+    }
+  }
 }
 </script>
 
