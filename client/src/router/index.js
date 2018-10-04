@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Landing from '@/components/Landing'
 import FlightChecker from '@/components/FlightChecker'
 import VisaChecker from '@/components/VisaChecker'
 import ApplyVisa from '@/components/ApplyVisa'
-import About from '@/components/About'
+
+import Landing from '@/pages/Landing'
+import About from '@/pages/About'
 
 Vue.use(Router)
 

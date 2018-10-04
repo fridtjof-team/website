@@ -3,9 +3,10 @@
 import { StfSelect, StfSelectOption } from "stf-vue-select"
 import FlagIcon from "vue-flag-icon"
 import Vue from 'vue'
-import App from './components/App'
+import App from './pages/App'
 import router from './router'
 import BootstrapVue from 'bootstrap-vue'
+import Map from '@/components/Map'
 import FlagPack from '@/components/FlagPack'
 
 
@@ -17,6 +18,7 @@ Vue.config.productionTip = false;
 Vue.component('stf-select-option', StfSelectOption);
 Vue.component('stf-select', StfSelect);
 Vue.component('cute-flag', FlagPack);
+Vue.component('world-map', Map);
 
 Vue.use(FlagIcon);
 Vue.use(BootstrapVue);
@@ -27,8 +29,6 @@ Vue.use(require('vue-moment'));
 new Vue({
   el: '#app',
   router,
-  StfSelectOption,
-  StfSelect,
   components: { App },
   template: '<App/>'
 })

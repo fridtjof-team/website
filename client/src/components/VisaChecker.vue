@@ -163,6 +163,9 @@
                   </b-button>
                 </b-col>              
               </b-row>
+              <b-row>
+                <b-col></b-col>
+              </b-row>
             </div>
           </b-col>
         </b-row>
@@ -171,15 +174,11 @@
 </template>
 
 <script>
-import { StfSelect, StfSelectOption } from 'stf-vue-select';
 import axios from 'axios';
 
 export default {
   name: 'VisaChecker',
-  components: {
-    StfSelect, 
-    StfSelectOption
-  },
+  components: {},
   created() {
     axios
       .get('https://api.mlab.com/api/1/databases/fridtjof/collections/country_list?apiKey=SAegfE9Mt98CqImokCAv6p9sECY7V_b1')
