@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import FlightChecker from '@/components/FlightChecker'
 import VisaChecker from '@/components/VisaChecker'
-import ApplyVisa from '@/components/ApplyVisa'
 
 import Landing from '@/pages/Landing'
 import About from '@/pages/About'
@@ -22,19 +20,9 @@ export default new Router({
       component: About
     },
     {
-      path: '/apply-visa',
-      name: 'ApplyVisa',
-      component: ApplyVisa
-    },
-    {
       path: '/check-visa',
       name: 'VisaChecker',
       component: VisaChecker
-    },
-    {
-      path: '/check-flights',
-      name: 'FlightChecker',
-      component: FlightChecker
     }
   ]
 })

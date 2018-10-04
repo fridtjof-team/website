@@ -140,12 +140,7 @@
                   <b-button variant="primary" href="#" v-b-toggle.usefulInfo>
                     ⚠️ Information <b-badge variant="light">{{notes.length}}</b-badge>
                   </b-button>
-                  <b-button variant="success" to="/apply-visa">
-                    📁 Apply Now
-                  </b-button>
-                  <b-button variant="light" to="/check-flights">
-                    💺 Check SQ Flights To {{toCtryValue.name}}
-                  </b-button>
+
                   <b-collapse id="usefulInfo" visible accordion="useful-info-accord" role="tabpanel">
                     <b-list-group >
                       <b-list-group-item v-for="item in notes" :key="item.text" class="d-flex justify-content-between align-items-center">
@@ -156,15 +151,12 @@
                       </b-list-group-item>
                     </b-list-group>  
                   </b-collapse>
-                </b-col>         
-                <b-col md="10" offset-md="1" v-if="!notes || notes.length <= 0">
-                  <b-button variant="light" to="/check-flights">
-                    💺 Check SQ Flights <span v-if="toCtryValue">To {{toCtryValue.name}}</span>
-                  </b-button>
-                </b-col>              
+                </b-col>                     
               </b-row>
               <b-row>
-                <b-col></b-col>
+                <b-col>
+
+                </b-col>
               </b-row>
             </div>
           </b-col>
