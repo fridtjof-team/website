@@ -3,17 +3,23 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 const app = express()
+var serveStatic = require('serve-static');
 
+
+// This is for production
+// app.use(serveStatic(__dirname + "/../../client/dist"));
+
+console.log(__dirname + "../../client/dist");
 var mongoose = require('mongoose');
-var Country = require("../models/country");
-var WikiVisa = require("../models/wiki_visa_type");
-var mongodbUri = 'mongodb://admin@ds115193.mlab.com:15193/fridtjof';
+var Country = require("../models/Country");
+var VisaConnectivity = require("../models/VisaConnectivity");
+var mongodbUri = 'mongodb://@ds121343.mlab.com:21343/frisco';
 
 mongoose.connect(mongodbUri, {
     useNewUrlParser: true,
     auth: {
         user: 'admin',
-        password: 'Fridtjof@123'
+        password: 'Frisco@123'
     }
 })
 
@@ -40,12 +46,12 @@ app.get('/countries', (req, res) => {
     }).sort({ _id: -1 })
 })
 
-app.get('/wiki-visa-type', (req, res) => {
-    WikiVisa.find({}, function (error, wikivisatype) {
+
+app.get('/visa-connectivity/:citizenship_iso/:destination_iso', (req, res) => {
+    VisaConnectivity.find({ citizenship_iso: req.params.citizenship_iso, 'visa_connectivity.iso': req.params.destination_iso }, { 'visa_connectivity.$': 1 }, function (error, VisaConnectivity) {
         if (error) { console.error(error); }
-        res.send({
-            wikivisatype: wikivisatype
-        })
-    }).sort({ _id: -1 })
+        res.send(VisaConnectivity[0].visa_connectivity[0]);
+    });
 })
+
 app.listen(process.env.PORT || 8081)

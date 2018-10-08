@@ -9,5 +9,5 @@ var CountrySchema = new Schema({
     wikilink: String,
 });
 
-var Country = mongoose.model("country_list", CountrySchema, "country_list");
+var Country = mongoose.model("country", CountrySchema, "countries");
 module.exports = Country;

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-navbar toggleable="md" type="dark" class="nav-bar-blue">
+    <b-navbar toggleable="md" class="nav-bar-blue">
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
       <b-navbar-brand to="/">Frisko</b-navbar-brand>
@@ -25,6 +25,10 @@ export default {
 </script>
 
 <style lang="scss">
+body {
+  background: #F6F9FF;
+  color: #42436A
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -32,10 +36,8 @@ export default {
   text-align: center;
   color: #2c3e50;  
 
-
   .nav-bar-blue {
-    background-color: #253655;
-    padding: 10px 15%;
+    padding: 10px 10%;
   }
 }
 
