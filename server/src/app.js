@@ -9,7 +9,6 @@ var serveStatic = require('serve-static');
 // This is for production
 // app.use(serveStatic(__dirname + "/../../client/dist"));
 
-console.log(__dirname + "../../client/dist");
 var mongoose = require('mongoose');
 var Country = require("../models/Country");
 var VisaConnectivity = require("../models/VisaConnectivity");
@@ -22,8 +21,6 @@ mongoose.connect(mongodbUri, {
         password: 'Frisco@123'
     }
 })
-
-// mongoose.Promise = global.Promise;
 
 var conn = mongoose.connection;
 
@@ -45,7 +42,6 @@ app.get('/countries', (req, res) => {
         })
     }).sort({ _id: -1 })
 })
-
 
 app.get('/visa-connectivity/:citizenship_iso/:destination_iso', (req, res) => {
     VisaConnectivity.find({ citizenship_iso: req.params.citizenship_iso, 'visa_connectivity.iso': req.params.destination_iso }, { 'visa_connectivity.$': 1 }, function (error, VisaConnectivity) {
