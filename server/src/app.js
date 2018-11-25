@@ -10,8 +10,8 @@ var serveStatic = require('serve-static');
 app.use(serveStatic(__dirname + "/../../client/dist"));
 
 var mongoose = require('mongoose');
-var Country = require("../models/Country");
-var VisaConnectivity = require("../models/VisaConnectivity");
+var Country = require("./models/Country");
+var VisaConnectivity = require("./models/VisaConnectivity");
 var mongodbUri = 'mongodb://@ds121343.mlab.com:21343/frisco';
 
 mongoose.connect(mongodbUri, {
