@@ -51,7 +51,7 @@ export default {
 
   .land {
     &:hover {
-      
+      fill: red;
     }
   }
 }
