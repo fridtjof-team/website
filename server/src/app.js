@@ -7,7 +7,7 @@ var serveStatic = require('serve-static');
 
 
 // This is for production
-// app.use(serveStatic(__dirname + "/../../client/dist"));
+app.use(serveStatic(__dirname + "/../../client/dist"));
 
 var mongoose = require('mongoose');
 var Country = require("../models/Country");
