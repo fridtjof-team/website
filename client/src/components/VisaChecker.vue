@@ -29,6 +29,7 @@
                                     <span><flag :iso="item.iso"  :squared="false" /> {{item.name}}</span>
                                 </stf-select-option>
                               </section>
+                              
                           </stf-select>
                         </b-col>
                         <b-col md="2" class="my-3 text-center p-0 d-none d-md-block">
@@ -63,47 +64,59 @@
                           <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
                         </svg>
                       </b-row>
-                    <div class="card-holder">
-                      <b-row v-if="apiCallMade" class="visa-check-result-heading-row">
-                        <b-col md="4">
-                          <span class="header">Visa type</span>
-                        </b-col>
-                        <b-col md="4">
-                          <span class="header">Duration of stay</span>
-                        </b-col>
-                        <b-col md="4">
-                          <span class="header">More information</span>
-                        </b-col>
-                      </b-row>
-                      <b-row v-if="apiCallMade" class="visa-check-result-row">
-                        <b-col md="4">
-                          <span class="result">{{visaType}}</span>
-                        </b-col>
-                        <b-col md="4">
-                          <span v-if="time" class="result">{{time}}</span>
-                        </b-col>
-                        <b-col md="4" class="text-center">
-                          <b-button v-if="source" :href="source" variant="success" class="more-info-btn" target="_blank">Learn More</b-button>
-                        </b-col>
-                      </b-row>
-                      <b-row v-if="apiCallMade && notes &&notes.length > 0" class="visa-notes-row text-left"> 
-                        <b-col md="10" offset-md="1">
-                          <b-button variant="primary" href="#" v-b-toggle.usefulInfo>
-                            ⚠️ Information <b-badge variant="light">{{notes.length}}</b-badge>
-                          </b-button>
-                          <b-collapse id="usefulInfo" visible accordion="useful-info-accord" role="tabpanel">
-                            <b-list-group >
-                              <b-list-group-item v-for="item in notes" :key="item.text" class="d-flex justify-content-between align-items-center">
-                                <span class="notes-text">{{item.text}}</span>
-                                <a v-if="item.source" :href="item.source" target="blank">
-                                  <b-badge variant="primary" > Learn More </b-badge>
-                                </a>
-                              </b-list-group-item>
-                            </b-list-group>  
-                          </b-collapse>
-                        </b-col>                     
-                      </b-row>
-                    </div>
+                      <div class="card-holder">
+                        <transition name="fade">
+                          <b-row v-if="apiCallMade" class="visa-check-result-heading-row">
+                            <b-col md="4">
+                              <span class="header">Visa type</span>
+                            </b-col>
+                            <b-col md="4">
+                              <span class="header">Duration of stay</span>
+                            </b-col>
+                            <b-col md="4">
+                              <span class="header">More information</span>
+                            </b-col>
+                          </b-row>
+                        </transition>
+                         <transition name="fade">
+                          <b-row v-if="apiCallMade" class="visa-check-result-row">
+                            <b-col md="4">
+                              <span class="result">{{visaType}}</span>
+                            </b-col>
+                            <b-col md="4">
+                              <span v-if="time" class="result">{{time}}</span>
+                            </b-col>
+                            <b-col md="4" class="text-center">
+                              <b-button v-if="source" :href="source" variant="success" class="more-info-btn" target="_blank">Learn More</b-button>
+                            </b-col>
+                          </b-row>
+                        </transition>
+                         <transition name="fade">
+                          <b-row v-if="apiCallMade && notes &&notes.length > 0" class="visa-notes-row text-left"> 
+                            <b-col md="10" offset-md="1">
+                              <b-button variant="primary" href="#" v-b-toggle.usefulInfo>
+                                ⚠️ Information <b-badge variant="light">{{notes.length}}</b-badge>
+                              </b-button>
+                              <b-collapse id="usefulInfo" visible accordion="useful-info-accord" role="tabpanel">
+                                <b-list-group >
+                                  <b-list-group-item v-for="item in notes" :key="item.text" class="d-flex justify-content-between align-items-center">
+                                    <span class="notes-text">{{item.text}}</span>
+                                    <a v-if="item.source" :href="item.source" target="blank">
+                                      <b-badge variant="primary" > Learn More </b-badge>
+                                    </a>
+                                  </b-list-group-item>
+                                </b-list-group>  
+                              </b-collapse>
+                            </b-col>                     
+                          </b-row>
+                        </transition>
+
+                      </div>
+                   
+                   
+                   
+            
+                    
                   </b-col>
                   <b-col lg="5">
                       <world-map :countryData="countryData" />
@@ -213,6 +226,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+
 h1, h2 {
   font-weight: normal;
 }

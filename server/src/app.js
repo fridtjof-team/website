@@ -1,10 +1,10 @@
+require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
 const app = express()
 var serveStatic = require('serve-static');
-
 
 // This is for production
 app.use(serveStatic(__dirname + "/../../client/dist"));
@@ -17,8 +17,8 @@ var mongodbUri = 'mongodb://@ds121343.mlab.com:21343/frisco';
 mongoose.connect(mongodbUri, {
     useNewUrlParser: true,
     auth: {
-        user: 'admin',
-        password: 'Frisco@123'
+        user: process.env.mongoUser,
+        password: process.env.mongoPass
     }
 })
 
