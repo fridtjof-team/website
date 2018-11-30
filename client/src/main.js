@@ -1,6 +1,5 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-require('dotenv').config()
 import { StfSelect, StfSelectOption } from "stf-vue-select"
 import FlagIcon from "vue-flag-icon"
 import Vue from 'vue'
