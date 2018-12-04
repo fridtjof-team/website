@@ -6,117 +6,137 @@
                <b-row class="row-eq-height">
                   <b-col lg="7">
                     <b-row class="visa-check-form-row">
-                        <b-col cols="10" offset="1" offset-md="0" md="12" class="my-3 p-0">
-                          <h1 class="header-text text-left">Check your visa requirement.</h1>
-                        </b-col>
-                        <b-col cols="10" offset="1"  offset-md="0"  md="5" class="my-3 p-0">
-                          <stf-select v-model="citizenshipCtryValue" class="fromSelector">
-                              <div class="text-left selector-val" slot="label">Your Nationality</div>
-                              <div class="text-left selector-val" slot="value">
-                                <div v-if="citizenshipCtryValue">
-                                  <span><flag :iso="citizenshipCtryValue.iso" :squared="false" />  {{citizenshipCtryValue.name}}</span>
+                      <b-col cols="10" offset="1" offset-md="0" md="12" class="my-3 p-0">
+                        <h1 class="header-text text-left">Check your visa requirement.</h1>
+                      </b-col>
+                      <!-- <b-col cols="10" offset="1"  offset-md="0"  md="5" class="my-3 p-0">
+                        <stf-select v-model="citizenshipCtryValue" class="fromSelector">
+                            <div class="text-left selector-val" slot="label">Your Nationality</div>
+                            <div class="text-left selector-val" slot="value">
+                              <div v-if="citizenshipCtryValue">
+                                <span><flag :iso="citizenshipCtryValue.iso" :squared="false" />  {{citizenshipCtryValue.name}}</span>
+                              </div>
+                            </div>
+                            <div slot="search-input">
+                              <input @input="onSearchCitizenship">
+                            </div>
+                            <section class="options delivery_order__options">
+                              <stf-select-option  
+                              v-for="item of citizenshipCountriesList" :key="item.iso"
+                              :value="item"
+                              :class="{'stf-select-option_selected': item.iso === (citizenshipCtryValue && citizenshipCtryValue.iso)}" 
+                              >
+                                  <span><flag :iso="item.iso"  :squared="false" /> {{item.name}}</span>
+                              </stf-select-option>
+                            </section>
+                            
+                        </stf-select>
+                      </b-col> -->
+                       <b-col cols="10" offset="1"  offset-md="0"  md="5" class="my-3 p-0">
+                        <v-select class="dropdown-input-field" placeholder="Your Nationality" maxHeight="200px" v-model="citizenshipCtryValue" label="name" :options="countriesList">
+                          <template slot="option" slot-scope="option" class="dropdown-option">
+                            <span><flag :iso="option.iso" :squared="false" />  {{option.name}}</span>
+                          </template>
+                        </v-select>
+                      </b-col>
+                      <b-col md="2" class="my-3 text-center p-0 d-none d-md-block">
+                        <img class="mt-2" src="/static/svg/airplane.svg" alt="">
+                      </b-col>
+                      <!-- <b-col cols="10" offset="1" offset-md="0" md="5" class="my-3 p-0">
+                        <stf-select v-model="toCtryValue" class="toSelector">
+                                <div class="text-left selector-val" slot="label">Flying To</div>
+                                <div class="text-left selector-val" slot="value">
+                                  <div v-if="toCtryValue">
+                                    <span><flag :iso="toCtryValue.iso" :squared="false" /> {{toCtryValue.name}} </span>
+                                  </div>
                                 </div>
-                              </div>
-                              <div slot="search-input">
-                                <input @input="onSearchCitizenship">
-                              </div>
-                              <section class="options delivery_order__options">
-                                <stf-select-option  
-                                v-for="item of citizenshipCountriesList" :key="item.iso"
-                                :value="item"
-                                :class="{'stf-select-option_selected': item.iso === (citizenshipCtryValue && citizenshipCtryValue.iso)}" 
-                                >
-                                    <span><flag :iso="item.iso"  :squared="false" /> {{item.name}}</span>
-                                </stf-select-option>
-                              </section>
-                              
-                          </stf-select>
-                        </b-col>
-                        <b-col md="2" class="my-3 text-center p-0 d-none d-md-block">
-                          <img class="mt-2" src="/static/svg/airplane.svg" alt="">
-                        </b-col>
-                        <b-col cols="10" offset="1" offset-md="0" md="5" class="my-3 p-0">
-                          <stf-select v-model="toCtryValue" class="toSelector">
-                                  <div class="text-left selector-val" slot="label">Flying To</div>
-                                  <div class="text-left selector-val" slot="value">
-                                    <div v-if="toCtryValue">
-                                      <span><flag :iso="toCtryValue.iso" :squared="false" /> {{toCtryValue.name}} </span>
-                                    </div>
-                                  </div>
-                                  <div slot="search-input">
-                                    <input @input="onSearchTo">
-                                  </div>
-                                  <section class="options country_options">
-                                    <stf-select-option  
-                                    v-for="item of toCountriesList" :key="item.iso"
-                                    :value="item"
-                                    :class="{'stf-select-option_selected': item.iso === (toCtryValue && toCtryValue.iso)}" 
-                                    >
-                                        <span><flag :iso="item.iso" :squared="false" /> <span class="country-name">{{item.name}}</span> </span>
-                                    </stf-select-option>
-                                  </section>
-                              </stf-select>
-                        </b-col>
-                      </b-row>
+                                <div slot="search-input">
+                                  <input @input="onSearchTo">
+                                </div>
+                                <section class="options country_options">
+                                  <stf-select-option  
+                                  v-for="item of toCountriesList" :key="item.iso"
+                                  :value="item"
+                                  :class="{'stf-select-option_selected': item.iso === (toCtryValue && toCtryValue.iso)}" 
+                                  >
+                                      <span><flag :iso="item.iso" :squared="false" /> <span class="country-name">{{item.name}}</span> </span>
+                                  </stf-select-option>
+                                </section>
+                            </stf-select>
+                      </b-col> -->
+                      <b-col cols="10" offset="1" offset-md="0" md="5" class="my-3 p-0">
+                        <multiselect 
+                          v-model="toCtryValue" 
+                          placeholder="To Country" 
+                          label="name" 
+                          track-by="name" 
+                          :options="countriesList" 
+                          :option-height="104" 
+                          :custom-label="customLabel"
+                          :show-labels="false">
+                          <template slot="singleLabel" slot-scope="props">
+                             <span><flag :iso="props.option.iso" :squared="false" />  {{props.option.name}}</span>
+                            </template>
+                          <template slot="option" slot-scope="props">
+                             <span><flag :iso="props.option.iso" :squared="false" />  {{props.option.name}}</span>
+                          </template>
+                        </multiselect>
 
-                      <b-row v-if="citizenshipCtryValue && toCtryValue && !apiCallMade"  class="loading-icon-row text-center">
-                        <svg class="spinner mx-auto" viewBox="0 0 50 50">
-                          <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
-                        </svg>
-                      </b-row>
-                      <div class="card-holder">
+                      </b-col>
+                    </b-row>
+                    <b-row v-if="citizenshipCtryValue && toCtryValue && !apiCallMade"  class="loading-icon-row text-center">
+                      <svg class="spinner mx-auto" viewBox="0 0 50 50">
+                        <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+                      </svg>
+                    </b-row>
+                    <div class="card-holder">
+                      <transition name="fade">
+                        <b-row v-if="apiCallMade" class="visa-check-result-heading-row">
+                          <b-col md="4">
+                            <span class="header">Visa type</span>
+                          </b-col>
+                          <b-col md="4">
+                            <span class="header">Duration of stay</span>
+                          </b-col>
+                          <b-col md="4">
+                            <span class="header">More information</span>
+                          </b-col>
+                        </b-row>
+                      </transition>
                         <transition name="fade">
-                          <b-row v-if="apiCallMade" class="visa-check-result-heading-row">
-                            <b-col md="4">
-                              <span class="header">Visa type</span>
-                            </b-col>
-                            <b-col md="4">
-                              <span class="header">Duration of stay</span>
-                            </b-col>
-                            <b-col md="4">
-                              <span class="header">More information</span>
-                            </b-col>
-                          </b-row>
-                        </transition>
-                         <transition name="fade">
-                          <b-row v-if="apiCallMade" class="visa-check-result-row">
-                            <b-col md="4">
-                              <span class="result">{{visaType}}</span>
-                            </b-col>
-                            <b-col md="4">
-                              <span v-if="time" class="result">{{time}}</span>
-                            </b-col>
-                            <b-col md="4" class="text-center">
-                              <b-button v-if="source" :href="source" variant="success" class="more-info-btn" target="_blank">Learn More</b-button>
-                            </b-col>
-                          </b-row>
-                        </transition>
-                         <transition name="fade">
-                          <b-row v-if="apiCallMade && notes &&notes.length > 0" class="visa-notes-row text-left"> 
-                            <b-col md="10" offset-md="1">
-                              <b-button variant="primary" href="#" v-b-toggle.usefulInfo>
-                                ⚠️ Information <b-badge variant="light">{{notes.length}}</b-badge>
-                              </b-button>
-                              <b-collapse id="usefulInfo" visible accordion="useful-info-accord" role="tabpanel">
-                                <b-list-group >
-                                  <b-list-group-item v-for="item in notes" :key="item.text" class="d-flex justify-content-between align-items-center">
-                                    <span class="notes-text">{{item.text}}</span>
-                                    <a v-if="item.source" :href="item.source" target="blank">
-                                      <b-badge variant="primary" > Learn More </b-badge>
-                                    </a>
-                                  </b-list-group-item>
-                                </b-list-group>  
-                              </b-collapse>
-                            </b-col>                     
-                          </b-row>
-                        </transition>
+                        <b-row v-if="apiCallMade" class="visa-check-result-row">
+                          <b-col md="4">
+                            <span class="result">{{visaType}}</span>
+                          </b-col>
+                          <b-col md="4">
+                            <span v-if="time" class="result">{{time}}</span>
+                          </b-col>
+                          <b-col md="4" class="text-center">
+                            <b-button v-if="source" :href="source" variant="success" class="more-info-btn" target="_blank">Learn More</b-button>
+                          </b-col>
+                        </b-row>
+                      </transition>
+                        <transition name="fade">
+                        <b-row v-if="apiCallMade && notes &&notes.length > 0" class="visa-notes-row text-left"> 
+                          <b-col md="10" offset-md="1">
+                            <b-button variant="primary" href="#" v-b-toggle.usefulInfo>
+                              ⚠️ Information <b-badge variant="light">{{notes.length}}</b-badge>
+                            </b-button>
+                            <b-collapse id="usefulInfo" visible accordion="useful-info-accord" role="tabpanel">
+                              <b-list-group >
+                                <b-list-group-item v-for="item in notes" :key="item.text" class="d-flex justify-content-between align-items-center">
+                                  <span class="notes-text">{{item.text}}</span>
+                                  <a v-if="item.source" :href="item.source" target="blank">
+                                    <b-badge variant="primary" > Learn More </b-badge>
+                                  </a>
+                                </b-list-group-item>
+                              </b-list-group>  
+                            </b-collapse>
+                          </b-col>                     
+                        </b-row>
+                      </transition>
 
-                      </div>
-                   
-                   
-                   
-            
-                    
+                    </div>                  
                   </b-col>
                   <b-col lg="5">
                       <world-map :countryData="countryData" />
@@ -153,6 +173,7 @@ export default {
       toCountriesList: [],
       countryData:{},
       color: "green",
+      selected: null,
     }
   },
   watch: {
@@ -204,14 +225,6 @@ export default {
     capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     },
-    onSearchCitizenship(e) {
-      var userInput = this.capitalizeFirstLetter(e.target.value);  
-      if (userInput) {
-        this.citizenshipCountriesList = this.countriesList.filter(el => el.name.indexOf(userInput) !== -1 || el.iso.indexOf(userInput) !== -1);
-      } else {
-        this.citizenshipCountriesList = this.countriesList;
-      }
-    },
     onSearchTo(e) {
       var userInput = this.capitalizeFirstLetter(e.target.value);      
       if (userInput) {
@@ -220,6 +233,9 @@ export default {
         this.toCountriesList = this.countriesList;
       }
     },
+    customLabel ({ name, iso }) {
+      return `${name} – ${iso}`
+    }
   }
 };
 </script>
@@ -235,6 +251,8 @@ export default {
 
 h1, h2 {
   font-weight: normal;
+  font-family: CatamaranBold, sans-serif;
+
 }
 
 .emoji-font {

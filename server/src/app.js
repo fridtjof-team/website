@@ -41,7 +41,7 @@ app.get('/countries', (req, res) => {
         res.send({
             countries: countries
         })
-    }).sort({ _id: -1 })
+    }).sort({ _id: 0 })
 })
 
 app.get('/visa-connectivity/:citizenship_iso/:destination_iso', (req, res) => {

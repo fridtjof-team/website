@@ -8,17 +8,24 @@ import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import Map from '@/components/Map'
 import FlagPack from '@/components/FlagPack'
+import vSelect from 'vue-select'
+import Multiselect from 'vue-multiselect'
 
 
 import "stf-vue-select/dist/lib/stf-vue-select.min.css"
+import "vue-multiselect/dist/vue-multiselect.min.css"
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false;
-Vue.component('stf-select-option', StfSelectOption);
-Vue.component('stf-select', StfSelect);
-Vue.component('cute-flag', FlagPack);
+Vue.component('stf-select-option', StfSelectOption)
+Vue.component('stf-select', StfSelect)
+Vue.component('cute-flag', FlagPack)
 Vue.component('world-map', Map);
+Vue.component('v-select', vSelect)
+Vue.component('multiselect', Multiselect)
+
+
 
 Vue.use(FlagIcon);
 Vue.use(BootstrapVue);

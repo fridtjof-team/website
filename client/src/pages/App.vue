@@ -3,7 +3,7 @@
     <b-navbar toggleable="md" class="nav-bar-blue">
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 
-      <b-navbar-brand to="/">Frisko</b-navbar-brand>
+      <b-navbar-brand to="/" class="navbar-logo">Frisko<sup>BETA</sup></b-navbar-brand>
 
       <b-collapse is-nav id="nav_collapse">
         <!-- Right aligned nav items -->
@@ -25,9 +25,97 @@ export default {
 </script>
 
 <style lang="scss">
+@import "~@/assets/sass/_colors.scss";
+@import "~@/assets/sass/_typo.scss";
+
 #mainBody {
   background: #F6F9FF;
-  color: #42436A;
+  color: $color-dark-blue;
+
+  .navbar-logo {
+    font-family: CatamaranBold, sans-serif;
+    font-size: 32px;
+    color: $color-dark-blue;
+
+    sup {
+      font-size: 30%;
+      top: -1.8em
+    }
+  }
+
+  .dropdown-input-field {
+    background-color:   #F6F9FF;
+    box-shadow: 0 0 38px 20px rgba(45,31,80,0.07);
+    border-radius: 4px;
+    padding: 5px 10px;
+
+    .selected-tag {
+      font-weight: 700;
+    }
+    &.open {
+      background-color: #fff;
+      border: 0px solid #e2e6e8;
+      border-radius: 3px 3px 0px 0px;
+      -webkit-box-shadow: 0 20px 66px 0 rgba(34,48,73,.2);
+      box-shadow: 0 20px 66px 0 rgba(34,48,73,.2);
+      outline: none;
+
+      .selected-tag {
+        display: none;
+      }
+    }
+
+    .dropdown-toggle {
+      border: none;
+      .vs__actions {
+        display: none;
+      }
+      &:after {
+        display: none;
+      }
+    }
+    .dropdown-menu {
+      background-color: #fff;
+      border: 0px solid #e2e6e8;
+      -webkit-box-shadow: 0 52 66px 0 rgba(34,48,73,.2);
+      box-shadow: 0 52px 66px 0 rgba(34,48,73,.2);
+      padding: 5px 10px;
+      border-radius: 0px 0px 3px 3px;
+
+      li {
+        a {
+          font-size: 14px;
+          line-height: 16px;
+          padding: 12px 24px 12px 12px;
+          box-sizing: border-box;
+          cursor: pointer;
+          outline: none;
+          border-radius: 3px;
+        }
+        
+      }
+
+      .active {
+        border-radius: 3px;
+
+        a {
+          background: $color-dark-blue;
+          color: white;
+        }
+        &.highlight {
+          background: #2e4369;
+          color: white;
+        }
+      }
+
+      .highlight {
+        a {
+          background: rgba(135,138,163,.1);
+          color: inherit;
+        }
+      } 
+    }
+  }
 
 
   .stf-select__container {
