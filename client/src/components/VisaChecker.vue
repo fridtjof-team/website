@@ -161,6 +161,8 @@ export default {
   watch: {
     citizenshipCtryValue() {
       this.apiCallMade = false;
+      this.apiCallFailed = false;
+
       if(this.toCtryValue){
         VisaService.fetchVisaConnectivity(this.citizenshipCtryValue.iso, this.toCtryValue.iso )
         .then(response => {
@@ -181,6 +183,8 @@ export default {
     },
     toCtryValue() {
       this.apiCallMade = false;
+      this.apiCallFailed = false;
+      
       if (this.citizenshipCtryValue) {
       VisaService.fetchVisaConnectivity(this.citizenshipCtryValue.iso, this.toCtryValue.iso )
       .then(response => {
