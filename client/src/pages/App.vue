@@ -89,10 +89,11 @@ export default {
         background-color:   #F6F9FF;
         height: calc(2.25rem + 2px);
         padding: 12px;
-        font-weight: 700;
         white-space: nowrap; 
         overflow: hidden;
         text-overflow: ellipsis;
+        font-weight: 700;
+        
 
         .flag-icon {
           margin: 0 10px 0 5px;
