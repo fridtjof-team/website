@@ -9,76 +9,52 @@
                       <b-col cols="10" offset="1" offset-md="0" md="12" class="my-3 p-0">
                         <h1 class="header-text text-left">Check your visa requirement.</h1>
                       </b-col>
-                      <!-- <b-col cols="10" offset="1"  offset-md="0"  md="5" class="my-3 p-0">
-                        <stf-select v-model="citizenshipCtryValue" class="fromSelector">
-                            <div class="text-left selector-val" slot="label">Your Nationality</div>
-                            <div class="text-left selector-val" slot="value">
-                              <div v-if="citizenshipCtryValue">
-                                <span><flag :iso="citizenshipCtryValue.iso" :squared="false" />  {{citizenshipCtryValue.name}}</span>
-                              </div>
-                            </div>
-                            <div slot="search-input">
-                              <input @input="onSearchCitizenship">
-                            </div>
-                            <section class="options delivery_order__options">
-                              <stf-select-option  
-                              v-for="item of citizenshipCountriesList" :key="item.iso"
-                              :value="item"
-                              :class="{'stf-select-option_selected': item.iso === (citizenshipCtryValue && citizenshipCtryValue.iso)}" 
-                              >
-                                  <span><flag :iso="item.iso"  :squared="false" /> {{item.name}}</span>
-                              </stf-select-option>
-                            </section>
-                            
-                        </stf-select>
-                      </b-col> -->
-                       <b-col cols="10" offset="1"  offset-md="0"  md="5" class="my-3 p-0">
-                        <v-select class="dropdown-input-field" placeholder="Your Nationality" maxHeight="200px" v-model="citizenshipCtryValue" label="name" :options="countriesList">
-                          <template slot="option" slot-scope="option" class="dropdown-option">
-                            <span><flag :iso="option.iso" :squared="false" />  {{option.name}}</span>
-                          </template>
-                        </v-select>
-                      </b-col>
-                      <b-col md="2" class="my-3 text-center p-0 d-none d-md-block">
-                        <img class="mt-2" src="/static/svg/airplane.svg" alt="">
-                      </b-col>
-                      <!-- <b-col cols="10" offset="1" offset-md="0" md="5" class="my-3 p-0">
-                        <stf-select v-model="toCtryValue" class="toSelector">
-                                <div class="text-left selector-val" slot="label">Flying To</div>
-                                <div class="text-left selector-val" slot="value">
-                                  <div v-if="toCtryValue">
-                                    <span><flag :iso="toCtryValue.iso" :squared="false" /> {{toCtryValue.name}} </span>
-                                  </div>
-                                </div>
-                                <div slot="search-input">
-                                  <input @input="onSearchTo">
-                                </div>
-                                <section class="options country_options">
-                                  <stf-select-option  
-                                  v-for="item of toCountriesList" :key="item.iso"
-                                  :value="item"
-                                  :class="{'stf-select-option_selected': item.iso === (toCtryValue && toCtryValue.iso)}" 
-                                  >
-                                      <span><flag :iso="item.iso" :squared="false" /> <span class="country-name">{{item.name}}</span> </span>
-                                  </stf-select-option>
-                                </section>
-                            </stf-select>
-                      </b-col> -->
-                      <b-col cols="10" offset="1" offset-md="0" md="5" class="my-3 p-0">
-                        <multiselect 
-                          v-model="toCtryValue" 
-                          placeholder="To Country" 
+                      <b-col cols="10" offset="1"  offset-md="0"  md="5" class="my-3 p-0">
+                          <multiselect 
+                          v-model="citizenshipCtryValue" 
+                          placeholder="From Country" 
+                          noResult="No results."
                           label="name" 
                           track-by="name" 
                           :options="countriesList" 
                           :option-height="104" 
                           :custom-label="customLabel"
-                          :show-labels="false">
+                          :show-labels="false"
+                          class="dropdown-select-input">
                           <template slot="singleLabel" slot-scope="props">
-                             <span><flag :iso="props.option.iso" :squared="false" />  {{props.option.name}}</span>
+                            <span><flag :iso="props.option.iso" :squared="false" />  {{props.option.name}}</span>
+                          </template>
+                          <template slot="option" slot-scope="props">
+                            <span><flag :iso="props.option.iso" :squared="false" />  {{props.option.name}}</span>
+                          </template>
+                          <template slot="noResult">
+                            <span>No results.</span>
+                          </template>
+                        </multiselect>
+                      </b-col>
+                      <b-col md="2" class="my-3 text-center p-0 d-none d-md-block">
+                        <img class="mt-2" src="/static/svg/airplane.svg" alt="">
+                      </b-col>
+                      <b-col cols="10" offset="1" offset-md="0" md="5" class="my-3 p-0">
+                        <multiselect 
+                          v-model="toCtryValue" 
+                          placeholder="To Country" 
+                          noResult="No results."
+                          label="name" 
+                          track-by="name" 
+                          :options="countriesList" 
+                          :option-height="104" 
+                          :custom-label="customLabel"
+                          :show-labels="false"
+                          class="dropdown-select-input">
+                          <template slot="singleLabel" slot-scope="props">
+                            <span><flag :iso="props.option.iso" :squared="false" />  {{props.option.name}}</span>
                             </template>
                           <template slot="option" slot-scope="props">
-                             <span><flag :iso="props.option.iso" :squared="false" />  {{props.option.name}}</span>
+                            <span><flag :iso="props.option.iso" :squared="false" />  {{props.option.name}}</span>
+                          </template>
+                          <template slot="noResult">
+                            <span>No results.</span>
                           </template>
                         </multiselect>
 

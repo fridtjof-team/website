@@ -8,7 +8,6 @@ import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import Map from '@/components/Map'
 import FlagPack from '@/components/FlagPack'
-import vSelect from 'vue-select'
 import Multiselect from 'vue-multiselect'
 
 
@@ -22,7 +21,6 @@ Vue.component('stf-select-option', StfSelectOption)
 Vue.component('stf-select', StfSelect)
 Vue.component('cute-flag', FlagPack)
 Vue.component('world-map', Map);
-Vue.component('v-select', vSelect)
 Vue.component('multiselect', Multiselect)
 
 
