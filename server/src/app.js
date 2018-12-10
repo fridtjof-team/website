@@ -37,17 +37,29 @@ app.use(cors())
 
 app.get('/countries', (req, res) => {
     Country.find({}, 'iso name', function (error, countries) {
-        if (error) { console.error(error); }
-        res.send({
-            countries: countries
-        })
+        if (error) { 
+            console.error(error);
+            res.status(500).send({ error: 'Something failed!' }); 
+        } else{
+            res.send({
+                countries: countries
+            })
+        }
     }).sort({ _id: 0 })
 })
 
 app.get('/visa-connectivity/:citizenship_iso/:destination_iso', (req, res) => {
     VisaConnectivity.find({ citizenship_iso: req.params.citizenship_iso, 'visa_connectivity.iso': req.params.destination_iso }, { 'visa_connectivity.$': 1 }, function (error, VisaConnectivity) {
-        if (error) { console.error(error); }
-        res.send(VisaConnectivity[0].visa_connectivity[0]);
+        if (error) { 
+            console.error(error);
+            res.status(500).send({ error: 'Something failed!' }); 
+        } else {
+            if (VisaConnectivity[0]){
+                res.status(200).send(VisaConnectivity[0].visa_connectivity[0]);
+            } else {
+                res.status(500).send({ error: 'Something failed!' }); 
+            }
+        }
     });
 })
 

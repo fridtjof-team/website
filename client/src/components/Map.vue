@@ -50,8 +50,10 @@ export default {
   height: 100%;
 
   .land {
+    transition: fill .3s;
     &:hover {
-      fill: red;
+      fill: #242038;
+      cursor: pointer;
     }
   }
 }

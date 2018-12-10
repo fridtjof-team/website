@@ -3,7 +3,7 @@
     <b-container fluid>
         <b-row class="form-main-row">
             <b-col cols="10" offset="1">
-               <b-row class="row-eq-height">
+              <b-row class="row-eq-height">
                   <b-col lg="7">
                     <b-row class="visa-check-form-row">
                       <b-col cols="10" offset="1" offset-md="0" md="12" class="my-3 p-0">
@@ -43,7 +43,7 @@
                           label="name" 
                           track-by="name" 
                           :options="countriesList" 
-                          :option-height="104" 
+                          :option-height="300" 
                           :custom-label="customLabel"
                           :show-labels="false"
                           class="dropdown-select-input">
@@ -65,7 +65,12 @@
                         <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
                       </svg>
                     </b-row>
-                    <div class="card-holder">
+                    <b-row v-if="apiCallMade && apiCallFailed"  class="failed-icon-row text-center">
+                        <b-col md="12">
+                          <b-alert show variant="warning">Currently we do not have this informtation. <br> We are continuosly adding support for more countries.</b-alert>
+                        </b-col>
+                    </b-row>
+                    <div v-if="!apiCallFailed" class="card-holder">
                       <transition name="fade">
                         <b-row v-if="apiCallMade" class="visa-check-result-heading-row">
                           <b-col md="4">
@@ -117,7 +122,7 @@
                   <b-col lg="5">
                       <world-map :countryData="countryData" />
                   </b-col>
-               </b-row>
+              </b-row>
             </b-col>
         </b-row>
     </b-container>
@@ -144,6 +149,7 @@ export default {
       source: null,
       notes: null,
       apiCallMade: false,
+      apiCallFailed: false,
       countriesList:[],
       citizenshipCountriesList: [],
       toCountriesList: [],
@@ -167,6 +173,8 @@ export default {
             this.notes = visaConnectivity.notes;
           })
           .catch(error => {
+            this.apiCallMade = true;
+            this.apiCallFailed = true;
             console.log(error)
           }); 
       }
@@ -174,8 +182,8 @@ export default {
     toCtryValue() {
       this.apiCallMade = false;
       if (this.citizenshipCtryValue) {
-       VisaService.fetchVisaConnectivity(this.citizenshipCtryValue.iso, this.toCtryValue.iso )
-       .then(response => {
+      VisaService.fetchVisaConnectivity(this.citizenshipCtryValue.iso, this.toCtryValue.iso )
+      .then(response => {
             const visaConnectivity = response.data;
             this.apiCallMade = true;
             this.time = visaConnectivity.time;
@@ -186,6 +194,8 @@ export default {
             
           })
           .catch(error => {
+            this.apiCallMade = true;
+            this.apiCallFailed = true;
             console.log(error)
           }); 
       }
@@ -284,6 +294,12 @@ h1, h2 {
         stroke-dasharray: 90, 150;
         stroke-dashoffset: -124;
       }
+    }
+  }
+
+  .failed-icon-row {
+    .alert-warning {
+      background-color: #FCF5C7;
     }
   }
 
