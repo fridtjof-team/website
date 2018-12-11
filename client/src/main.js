@@ -9,7 +9,7 @@ import BootstrapVue from 'bootstrap-vue'
 import Map from '@/components/Map'
 import FlagPack from '@/components/FlagPack'
 import Multiselect from 'vue-multiselect'
-
+import VueAnalytics from 'vue-analytics'
 
 import "stf-vue-select/dist/lib/stf-vue-select.min.css"
 import "vue-multiselect/dist/vue-multiselect.min.css"
@@ -28,7 +28,9 @@ Vue.component('multiselect', Multiselect)
 Vue.use(FlagIcon);
 Vue.use(BootstrapVue);
 Vue.use(require('vue-moment'));
-
+Vue.use(VueAnalytics, {
+  id: 'UA-77360492-2'
+})
 
 /* eslint-disable no-new */
 new Vue({
