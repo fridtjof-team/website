@@ -14,7 +14,6 @@
     "bootstrap-vue": "^2.0.0-rc.11",
     "chroma-js": "^1.4.0",
     "dotenv": "^6.1.0",
-    "stf-vue-select": "^0.1.11",
     "vue": "^2.5.2",
     "vue-analytics": "^5.16.1",
     "vue-flag-icon": "^1.0.6",

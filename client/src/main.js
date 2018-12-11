@@ -1,24 +1,26 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import { StfSelect, StfSelectOption } from "stf-vue-select"
-import FlagIcon from "vue-flag-icon"
 import Vue from 'vue'
-import App from './pages/App'
 import router from './router'
+// View Modules
 import BootstrapVue from 'bootstrap-vue'
+import FlagIcon from "vue-flag-icon"
+import Multiselect from 'vue-multiselect'
+
+//Components
 import Map from '@/components/Map'
 import FlagPack from '@/components/FlagPack'
-import Multiselect from 'vue-multiselect'
+import App from './pages/App'
+
 import VueAnalytics from 'vue-analytics'
 
-import "stf-vue-select/dist/lib/stf-vue-select.min.css"
 import "vue-multiselect/dist/vue-multiselect.min.css"
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+const isProd = process.env.NODE_ENV === 'production'
+
 Vue.config.productionTip = false;
-Vue.component('stf-select-option', StfSelectOption)
-Vue.component('stf-select', StfSelect)
 Vue.component('cute-flag', FlagPack)
 Vue.component('world-map', Map);
 Vue.component('multiselect', Multiselect)
@@ -29,7 +31,12 @@ Vue.use(FlagIcon);
 Vue.use(BootstrapVue);
 Vue.use(require('vue-moment'));
 Vue.use(VueAnalytics, {
-  id: 'UA-77360492-2'
+  id: 'UA-77360492-2',
+  router,
+  debug: {
+    enabled: !isProd,
+    sendHitTask: isProd
+  }
 })
 
 /* eslint-disable no-new */
